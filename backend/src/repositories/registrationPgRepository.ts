@@ -28,11 +28,11 @@ export class RegistrationPgRepository implements RegistrationRepository {
 
   async getStandingsByTournament(tournamentId: number): Promise<StandingRow[]> {
     const result = await this.pool.query<StandingRow>(
-      `SELECT p.id as "playerId", p.name as "playerName", r.points
+      `SELECT p.id as "playerId", CONCAT(p.name, ' ', p.last_name) as "playerName", r.points
        FROM registrations r
        JOIN players p ON p.id = r.player_id
        WHERE r.tournament_id = $1
-       ORDER BY r.points DESC, p.name ASC`,
+       ORDER BY r.points DESC, p.last_name ASC, p.name ASC`,
       [tournamentId]
     );
     return result.rows;
@@ -40,11 +40,11 @@ export class RegistrationPgRepository implements RegistrationRepository {
 
   async getGlobalRanking(): Promise<RankingRow[]> {
     const result = await this.pool.query<RankingRow>(
-      `SELECT p.id as "playerId", p.name as "playerName", COALESCE(SUM(r.points), 0)::int as "totalPoints"
+      `SELECT p.id as "playerId", CONCAT(p.name, ' ', p.last_name) as "playerName", COALESCE(SUM(r.points), 0)::int as "totalPoints"
        FROM players p
        LEFT JOIN registrations r ON r.player_id = p.id
-       GROUP BY p.id, p.name
-       ORDER BY "totalPoints" DESC, p.name ASC`
+       GROUP BY p.id, p.name, p.last_name
+       ORDER BY "totalPoints" DESC, p.last_name ASC, p.name ASC`
     );
     return result.rows;
   }

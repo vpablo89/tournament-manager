@@ -2,11 +2,18 @@ export type Tournament = {
   id: number;
   name: string;
   date: string;
+  categories: string[];
 };
 
 export type Player = {
   id: number;
   name: string;
+  lastName: string;
+  dni: string;
+  phone: string;
+  email: string;
+  position: 'drive' | 'reves' | 'ambos';
+  category: string;
 };
 
 export type Registration = {

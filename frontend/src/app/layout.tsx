@@ -1,5 +1,7 @@
 import './globals.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import { ReactNode } from 'react';
+import { TopNav } from '../components/TopNav';
 
 export const metadata = {
   title: 'Tournament Manager',
@@ -9,7 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <TopNav />
+        <main className="app-container">{children}</main>
+      </body>
     </html>
   );
 }

@@ -30,7 +30,9 @@ export function RegistrationForm({ players, tournaments, onCreated }: Props) {
   return (
     <form onSubmit={onSubmit}>
       <h2>Register Player</h2>
+      <label htmlFor="registration-player">Player</label>
       <select
+        id="registration-player"
         value={playerId}
         onChange={(e) => setPlayerId(Number(e.target.value))}
         required
@@ -42,7 +44,9 @@ export function RegistrationForm({ players, tournaments, onCreated }: Props) {
           </option>
         ))}
       </select>
+      <label htmlFor="registration-tournament">Tournament</label>
       <select
+        id="registration-tournament"
         value={tournamentId}
         onChange={(e) => setTournamentId(Number(e.target.value))}
         required
@@ -54,7 +58,9 @@ export function RegistrationForm({ players, tournaments, onCreated }: Props) {
           </option>
         ))}
       </select>
+      <label htmlFor="registration-points">Points</label>
       <input
+        id="registration-points"
         type="number"
         min={0}
         value={points}

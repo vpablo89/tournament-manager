@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "Tournament Manager Frontend",
+    "description": "Coleccion para probar las rutas del frontend Next.js.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "tournamentId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET / (Home)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /tournaments",
+      "request": { "method": "GET", "url": "{{baseUrl}}/tournaments" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /tournaments/new",
+      "request": { "method": "GET", "url": "{{baseUrl}}/tournaments/new" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /tournaments/:id/standings",
+      "request": { "method": "GET", "url": "{{baseUrl}}/tournaments/{{tournamentId}}/standings" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /players",
+      "request": { "method": "GET", "url": "{{baseUrl}}/players" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /players/new",
+      "request": { "method": "GET", "url": "{{baseUrl}}/players/new" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /players/ranking",
+      "request": { "method": "GET", "url": "{{baseUrl}}/players/ranking" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /registrations",
+      "request": { "method": "GET", "url": "{{baseUrl}}/registrations" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /registrations/new",
+      "request": { "method": "GET", "url": "{{baseUrl}}/registrations/new" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    },
+    {
+      "name": "GET /docs",
+      "request": { "method": "GET", "url": "{{baseUrl}}/docs" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"] } }]
+    }
+  ]
+}

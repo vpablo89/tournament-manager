@@ -23,7 +23,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Pablo\"\n}"
+              "raw": "{\n  \"name\": \"Pablo\",\n  \"lastName\": \"Vera\",\n  \"dni\": \"12345678\",\n  \"phone\": \"1122334455\",\n  \"email\": \"pablo@example.com\",\n  \"position\": \"ambos\",\n  \"category\": \"segunda\"\n}"
             },
             "url": "{{baseUrl}}/players"
           },
@@ -70,7 +70,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Open Madrid\",\n  \"date\": \"2026-06-12T10:00:00.000Z\"\n}"
+              "raw": "{\n  \"name\": \"Open Madrid\",\n  \"date\": \"2026-06-12T10:00:00.000Z\",\n  \"categories\": [\"primera\", \"segunda\", \"tercera\", \"cuarta\", \"quinta\", \"sexta\", \"septima\"]\n}"
             },
             "url": "{{baseUrl}}/tournaments"
           },

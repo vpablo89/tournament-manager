@@ -22,14 +22,20 @@ describe('TournamentForm', () => {
     fireEvent.change(screen.getByPlaceholderText('Tournament name'), {
       target: { value: 'Open' }
     });
-    fireEvent.change(screen.getByDisplayValue(''), {
-      target: { value: '2026-01-01T10:00' }
+    fireEvent.change(screen.getByLabelText('Date and time'), {
+      target: { value: '2026-01-01 10:00' }
     });
     fireEvent.click(screen.getByRole('button', { name: 'Create' }));
 
     await waitFor(() => {
       expect(api.createTournament).toHaveBeenCalledTimes(1);
     });
+    expect(api.createTournament).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: 'Open',
+        categories: ['primera', 'segunda', 'tercera', 'cuarta', 'quinta', 'sexta', 'septima']
+      })
+    );
     expect(onCreated).toHaveBeenCalled();
   });
 });

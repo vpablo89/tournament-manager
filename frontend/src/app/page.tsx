@@ -1,62 +1,20 @@
-'use client';
-
-import { PlayerForm } from '../components/PlayerForm';
-import { RankingTable } from '../components/RankingTable';
-import { RegistrationForm } from '../components/RegistrationForm';
-import { StandingsTable } from '../components/StandingsTable';
-import { TournamentForm } from '../components/TournamentForm';
-import { useTournamentManager } from '../hooks/useTournamentManager';
-
 export default function HomePage() {
-  const {
-    tournaments,
-    players,
-    selectedTournamentId,
-    selectedTournament,
-    standings,
-    ranking,
-    loading,
-    error,
-    setSelectedTournamentId,
-    refresh
-  } = useTournamentManager();
-
   return (
-    <main>
+    <section className="panel">
       <h1>Padel Tournament Manager</h1>
       <p>
-        API docs: <a href="/docs">/docs</a>
+        Minimal UI, separated flows, and backend-driven ranking/standings.
       </p>
-
-      {loading && <p>Loading...</p>}
-      {error && <p role="alert">{error}</p>}
-
-      <div style={{ display: 'grid', gap: '12px', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-        <TournamentForm onCreated={refresh} />
-        <PlayerForm onCreated={refresh} />
-        <RegistrationForm players={players} tournaments={tournaments} onCreated={refresh} />
+      <div className="grid grid-3">
+        <a className="panel" href="/tournaments/new">Create tournament</a>
+        <a className="panel" href="/players/new">Create player</a>
+        <a className="panel" href="/registrations/new">Register player</a>
+        <a className="panel" href="/tournaments">View tournaments</a>
+        <a className="panel" href="/players">View players</a>
+        <a className="panel" href="/registrations">View registrations</a>
+        <a className="panel" href="/players/ranking">Global ranking</a>
+        <a className="panel" href="/docs">Swagger docs</a>
       </div>
-
-      <section style={{ marginTop: '16px' }}>
-        <label htmlFor="tournament-select">Select tournament for standings: </label>
-        <select
-          id="tournament-select"
-          value={selectedTournamentId ?? ''}
-          onChange={(e) => setSelectedTournamentId(Number(e.target.value))}
-        >
-          <option value="">Select tournament</option>
-          {tournaments.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.name}
-            </option>
-          ))}
-        </select>
-      </section>
-
-      <div style={{ display: 'grid', gap: '12px', marginTop: '16px', gridTemplateColumns: '1fr 1fr' }}>
-        <StandingsTable standings={standings} tournamentName={selectedTournament?.name} />
-        <RankingTable ranking={ranking} />
-      </div>
-    </main>
+    </section>
   );
 }

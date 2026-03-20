@@ -38,6 +38,14 @@ export class InMemoryPlayerRepository implements PlayerRepository {
     return item;
   }
 
+  async update(id: number, input: CreatePlayerInput): Promise<Player | null> {
+    const index = this.items.findIndex((item) => item.id === id);
+    if (index < 0) return null;
+    const updated = { id, ...input };
+    this.items[index] = updated;
+    return updated;
+  }
+
   async list(): Promise<Player[]> {
     return [...this.items];
   }
@@ -69,7 +77,9 @@ export class InMemoryRegistrationRepository implements RegistrationRepository {
       .filter((r) => r.tournamentId === tournamentId)
       .map((r) => ({
         playerId: r.playerId,
-        playerName: players.find((p) => p.id === r.playerId)?.name ?? 'Unknown',
+        playerName:
+          `${players.find((p) => p.id === r.playerId)?.name ?? ''} ${players.find((p) => p.id === r.playerId)?.lastName ?? ''}`.trim() ||
+          'Unknown',
         points: r.points
       }))
       .sort((a, b) => b.points - a.points || a.playerName.localeCompare(b.playerName));
@@ -84,7 +94,7 @@ export class InMemoryRegistrationRepository implements RegistrationRepository {
     return players
       .map((p) => ({
         playerId: p.id,
-        playerName: p.name,
+        playerName: `${p.name} ${p.lastName}`.trim(),
         totalPoints: map.get(p.id) ?? 0
       }))
       .sort((a, b) => b.totalPoints - a.totalPoints || a.playerName.localeCompare(b.playerName));

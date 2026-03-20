@@ -17,6 +17,7 @@ export function createRoutes(controllers: Controllers): Router {
   router.get('/tournaments/:id/standings', controllers.registrationController.standings);
 
   router.post('/players', controllers.playerController.create);
+  router.put('/players/:id', controllers.playerController.update);
   router.get('/players', controllers.playerController.list);
   router.get('/players/ranking', controllers.playerController.ranking);
 
