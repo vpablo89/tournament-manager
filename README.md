@@ -24,6 +24,21 @@ Gestor de torneos de padel con arquitectura fullstack:
 - `GET /tournaments/:id/standings`
 - `GET /players/ranking`
 
+## Swagger
+
+- Backend Swagger UI: `http://localhost:4000/api-docs`
+- Frontend docs page (embeds Swagger): `http://localhost:3000/docs`
+
+## Postman
+
+- Collection file: `postman/tournament-manager.postman_collection.json`
+- Recommended execution order:
+  1. `POST /players` (sets `playerId`)
+  2. `POST /tournaments` (sets `tournamentId`)
+  3. `POST /registrations`
+  4. `GET /tournaments/:id/standings`
+  5. `GET /players/ranking`
+
 ## Correr con Docker (recomendado)
 
 Desde la raiz:

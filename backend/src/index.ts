@@ -12,7 +12,7 @@ import { TournamentServiceImpl } from './services/tournamentService';
 import { getPool } from './utils/db';
 import { ensureSchema } from './utils/ensureSchema';
 
-async function bootstrap() {
+void (async function bootstrap() {
   const pool = getPool();
   await ensureSchema(pool);
 
@@ -37,6 +37,6 @@ async function bootstrap() {
     // eslint-disable-next-line no-console
     console.log(`API running on :${env.port}`);
   });
-}
+})();
 
-void bootstrap();
+

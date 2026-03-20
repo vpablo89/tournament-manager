@@ -24,6 +24,9 @@ export default function HomePage() {
   return (
     <main>
       <h1>Padel Tournament Manager</h1>
+      <p>
+        API docs: <a href="/docs">/docs</a>
+      </p>
 
       {loading && <p>Loading...</p>}
       {error && <p role="alert">{error}</p>}

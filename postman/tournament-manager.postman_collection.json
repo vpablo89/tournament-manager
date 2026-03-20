@@ -1,0 +1,149 @@
+{
+  "info": {
+    "name": "Tournament Manager API",
+    "description": "Coleccion para probar el flujo completo del gestor de torneos de padel.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000" },
+    { "key": "playerId", "value": "" },
+    { "key": "tournamentId", "value": "" },
+    { "key": "registrationId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "POST /players (sets playerId)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Pablo\"\n}"
+            },
+            "url": "{{baseUrl}}/players"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.id) pm.collectionVariables.set('playerId', String(body.id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /players",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/players"
+          }
+        },
+        {
+          "name": "GET /players/ranking",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/players/ranking"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tournaments",
+      "item": [
+        {
+          "name": "POST /tournaments (sets tournamentId)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Open Madrid\",\n  \"date\": \"2026-06-12T10:00:00.000Z\"\n}"
+            },
+            "url": "{{baseUrl}}/tournaments"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.id) pm.collectionVariables.set('tournamentId', String(body.id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /tournaments",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tournaments"
+          }
+        },
+        {
+          "name": "GET /tournaments/:id/standings",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tournaments/{{tournamentId}}/standings"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registrations",
+      "item": [
+        {
+          "name": "POST /registrations (sets registrationId)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"playerId\": {{playerId}},\n  \"tournamentId\": {{tournamentId}},\n  \"points\": 25\n}"
+            },
+            "url": "{{baseUrl}}/registrations"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const body = pm.response.json();",
+                  "  if (body.id) pm.collectionVariables.set('registrationId', String(body.id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /registrations",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/registrations"
+          }
+        }
+      ]
+    }
+  ]
+}

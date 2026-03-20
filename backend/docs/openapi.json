@@ -1,0 +1,124 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Tournament Manager API",
+    "version": "1.0.0",
+    "description": "API for padel tournament management."
+  },
+  "servers": [
+    { "url": "http://localhost:4000" }
+  ],
+  "paths": {
+    "/tournaments": {
+      "post": {
+        "summary": "Create tournament",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "date"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "date": { "type": "string", "format": "date-time" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      },
+      "get": {
+        "summary": "List tournaments",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/players": {
+      "post": {
+        "summary": "Create player",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      },
+      "get": {
+        "summary": "List players",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/players/ranking": {
+      "get": {
+        "summary": "Global ranking",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/registrations": {
+      "post": {
+        "summary": "Create registration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["playerId", "tournamentId", "points"],
+                "properties": {
+                  "playerId": { "type": "integer" },
+                  "tournamentId": { "type": "integer" },
+                  "points": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      },
+      "get": {
+        "summary": "List registrations",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/tournaments/{id}/standings": {
+      "get": {
+        "summary": "Tournament standings",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    }
+  }
+}
